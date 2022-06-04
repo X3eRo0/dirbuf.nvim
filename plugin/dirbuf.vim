@@ -28,6 +28,10 @@ augroup dirbuf
   autocmd BufEnter * if isdirectory(expand('%')) && !&modified
         \ | execute 'lua require"dirbuf".init_dirbuf(vim.b.dirbuf_history, vim.b.dirbuf_history_index, true)'
         \ | endif
+  " Netrw hijacking for vim-plug and &rtp friends
+  autocmd VimEnter * if exists('#FileExplorer') | execute 'autocmd! FileExplorer *' | endif
 augroup END
+" Netrw hijacking for packer and packages friends
+if exists('#FileExplorer') | execute 'autocmd! FileExplorer *' | endif
 
 let g:loaded_dirbuf = 1
